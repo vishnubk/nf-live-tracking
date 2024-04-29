@@ -14,13 +14,11 @@
  * limitations under the License.
  */
 
-package nextflow.prov
+
 
 import java.nio.file.FileSystems
 import java.nio.file.Path
 import java.nio.file.PathMatcher
-
-import groovy.transform.CompileStatic
 import groovy.util.logging.Slf4j
 import nextflow.Session
 import nextflow.processor.TaskHandler
@@ -35,113 +33,30 @@ import java.time.format.DateTimeFormatter
 import java.time.Instant
 import java.math.BigDecimal
 import nextflow.file.FileHolder
+import groovy.transform.CompileStatic
+import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.ScheduledExecutorService
 
-// /**
-//  * Plugin observer of workflow events
-//  *
-//  * @author Bruno Grande <bruno.grande@sagebase.org>
-//  * @author Ben Sherman <bentshermann@gmail.com>
-//  */
-@Slf4j
+
 @CompileStatic
-class ProvObserver implements TraceObserver {
+@Slf4j
+class LiveTracker {
+    private Path baseOutputPath
+    private String filePrefix
+    private List<Map> eventLogs = []
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1)
+    private int dumpInterval = 600 // default to 600 seconds (10 minutes)
 
-    public static final List<String> VALID_FORMATS = ['bco', 'dag', 'legacy', 'live']
-
-    private Session session
-
-    private List<Renderer> renderers
-
-    private List<PathMatcher> matchers
-
-    private Set<TaskRun> tasks = []
-
-    private Map<Path,Path> workflowOutputs = [:]
-
-    ProvObserver(Map<String,Map> formats, List<String> patterns) {
-        this.renderers = formats.collect( (name, config) -> createRenderer(name, config) )
-        this.matchers = patterns.collect( pattern ->
-            FileSystems.getDefault().getPathMatcher("glob:**/${pattern}")
-        )
-    }
-
-    private Renderer createRenderer(String name, Map opts) {
-        if( name == 'bco' )
-            return new BcoRenderer(opts)
-
-        if( name == 'dag' )
-            return new DagRenderer(opts)
-
-        if( name == 'legacy' )
-            return new LegacyRenderer(opts)
-        
-        if( name == 'live' )
-            return null
-        //     return new LiveObserver(opts)
-
-        throw new IllegalArgumentException("Invalid provenance format -- valid formats are ${VALID_FORMATS.join(', ')}")
-    }
-
-    @Override
-    void onFlowCreate(Session session) {
-        this.session = session
-    }
-
-    void onProcessSubmit(TaskHandler handler, TraceRecord trace){
-
-        String exitValue = trace.get('exit') // Assuming there's a getter like this
-        String statusValue = trace.get('status') // Same as above
-
-    }
-    
-
-    @Override
-    void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        // skip failed tasks
-        final task = handler.task
-        if( !task.isSuccess() )
-            return
-        tasks << task
-    }
-
-    @Override
-    void onProcessCached(TaskHandler handler, TraceRecord trace) {
-        tasks << handler.task
-    }
-
-    @Override
-    void onFilePublish(Path destination, Path source) {
-        boolean match = matchers.isEmpty() || matchers.any { matcher ->
-            matcher.matches(destination)
-        }
-
-        if( !match )
-            return
-
-        workflowOutputs[source] = destination
-    }
-
-    @Override
-    void onFlowComplete() {
-        if( !session.isSuccess() )
-            return
-
-        renderers.each( renderer ->
-            renderer.render(session, tasks, workflowOutputs)
-        )
-    }
-
+    LiveTracker(Path outputPath, int interval) {
+    this.baseOutputPath = outputPath.getParent()  // Ensure this is the intended directory
+    this.filePrefix = outputPath.getFileName().toString()  // The intended file prefix without '.json'
+    this.dumpInterval = interval
+    log.info "Live Tracker initialized for directory: ${baseOutputPath}, file prefix: ${filePrefix}"
+    scheduleDumpEvents()
 }
 
 
-@CompileStatic
-class LiveTracker {
-    private Path outputPath
-    private List<Map> eventLogs = []
-
-    LiveTracker(Path outputPath) {
-        this.outputPath = outputPath
-    }
 
     private static def jsonify(root) {
     if ( root instanceof Map )
@@ -161,81 +76,117 @@ class LiveTracker {
 
     else
         root.toString()
-}
+    }
 
-void logEvent(String eventType, TaskHandler handler, TraceRecord trace) {
-    
-    String utcNow = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT)
-    
-    BigDecimal durationSeconds = trace.get('duration') ? ((BigDecimal) trace.get('duration')).divide(new BigDecimal("1000.0")) : null
-    BigDecimal realtimeSeconds = trace.get('realtime') ? ((BigDecimal) trace.get('realtime')).divide(new BigDecimal("1000.0")) : null
+    void logEvent(String eventType, TaskHandler handler, TraceRecord trace) {
+        String utcNow = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT)
 
-    String submitTime = trace.get('submit') ? Instant.ofEpochMilli((Long) trace.get('submit')).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT) : null
-    String startTime = trace.get('start') ? Instant.ofEpochMilli((Long) trace.get('start')).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT) : null
-    String completeTime = trace.get('complete') ? Instant.ofEpochMilli((Long) trace.get('complete')).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT) : null
+        BigDecimal durationSeconds = trace.get('duration') ? ((BigDecimal) trace.get('duration')).divide(new BigDecimal("1000.0")) : null
+        BigDecimal realtimeSeconds = trace.get('realtime') ? ((BigDecimal) trace.get('realtime')).divide(new BigDecimal("1000.0")) : null
 
-    Map eventDetails = [
-        'event_type': eventType,
-        'task_id': handler.task.id,
-        'task_name': handler.task.name,
-        'status': trace.get('status'),
-        'exit': trace.get('exit'),
-        'submit': submitTime,
-        'start': startTime,
-        'complete': completeTime,
-        'duration_seconds': durationSeconds,
-        'realtime_seconds': realtimeSeconds,
-        'attempt': trace.get('attempt'),
-        'workdir': trace.get('workdir'),
-        'env': trace.get('env'),
-        'UTC_TIME': utcNow, 
-        'task': [
-            'id': handler.task.id as String,
-            'name': handler.task.name,
-            'cached': handler.task.cached,
-            'process': handler.task.processor.name,
-            //'script': handler.task.script,
-            'inputs': handler.task.inputs.findResults { inParam, object -> 
-                def inputMap = [ 
-                    'name': inParam.getName(),
-                    'value': jsonify(object) 
-                ] 
-                inputMap['name'] != '$' ? inputMap : null
-            },
-            'outputs': handler.task.outputs.findResults { outParam, object -> 
-                def outputMap = [
-                    'name': outParam.getName(),
-                    'emit': outParam.getChannelEmitName(),
-                    'value': jsonify(object) 
-                ] 
-                outputMap['name'] != '$' ? outputMap : null
-            }
+        String submitTime = trace.get('submit') ? Instant.ofEpochMilli((Long) trace.get('submit')).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT) : null
+        String startTime = trace.get('start') ? Instant.ofEpochMilli((Long) trace.get('start')).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT) : null
+        String completeTime = trace.get('complete') ? Instant.ofEpochMilli((Long) trace.get('complete')).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT) : null
+
+        Map eventDetails = [
+            'event_type': eventType,
+            'task_id': handler.task.id,
+            'task_name': handler.task.name,
+            'status': trace.get('status'),
+            'exit': trace.get('exit'),
+            'submit': submitTime,
+            'start': startTime,
+            'complete': completeTime,
+            'duration_seconds': durationSeconds,
+            'realtime_seconds': realtimeSeconds,
+            'attempt': trace.get('attempt'),
+            'workdir': trace.get('workdir'),
+            'env': trace.get('env'),
+            'UTC_TIME': utcNow,
+            'task': [
+                'id': handler.task.id as String,
+                'name': handler.task.name,
+                'cached': handler.task.cached,
+                'process': handler.task.processor.name,
+                //'script': handler.task.script, // This is a large string and may not be useful to dump
+                'inputs': handler.task.inputs.findResults { inParam, object -> 
+                    def inputMap = [ 
+                        'name': inParam.getName(),
+                        'value': jsonify(object) 
+                    ] 
+                    inputMap['name'] != '$' ? inputMap : null
+                },
+                'outputs': handler.task.outputs.findResults { outParam, object -> 
+                    def outputMap = [
+                        'name': outParam.getName(),
+                        'emit': outParam.getChannelEmitName(),
+                        'value': jsonify(object) 
+                    ] 
+                    outputMap['name'] != '$' ? outputMap : null
+                }
+            ]
         ]
-    ]
-    eventLogs << eventDetails
-}
+        log.info "Event logged: ${eventType} for task: ${handler.task.name}"
+
+        eventLogs << eventDetails
+    }
 
     void renderEvents() {
+    try {
         if (!eventLogs.isEmpty()) {
-            outputPath.toFile().withWriter('UTF-8') { writer ->
+            String timestamp = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"))
+            String filename = filePrefix + "_" + timestamp + ".json"
+            Path currentOutputPath = baseOutputPath.resolve(filename)
+            currentOutputPath.toFile().withWriter('UTF-8') { writer ->
                 writer.write(JsonOutput.prettyPrint(JsonOutput.toJson(eventLogs)))
             }
+            log.info "Data written to file: ${currentOutputPath}"
+            eventLogs.clear() // Clear the list for the next interval
+        }
+    } catch (Exception e) {
+        log.error("Failed to write events: ${e.message}", e)
+    }
+}
+
+
+    private void scheduleDumpEvents() {
+        log.info "Scheduling dump events every ${dumpInterval} seconds"
+        scheduler.scheduleAtFixedRate({ ->
+        log.info "Attempting to render events." 
+        renderEvents()
+    }, 0, dumpInterval, TimeUnit.SECONDS)
+}
+
+    void shutdownTracker() {
+        scheduler.shutdownNow()
+        try {
+            if (!scheduler.awaitTermination(5, TimeUnit.SECONDS)) {
+                log.warn("Executor did not terminate in the specified time.");
+            }
+            renderEvents() // Ensure all logs are written
+        } catch (InterruptedException e) {
+            log.error("Scheduler shutdown interrupted", e)
         }
     }
 }
-@Slf4j
+
+
+
+
 @CompileStatic
+@Slf4j
 class LiveObserver implements TraceObserver {
     private LiveTracker liveTracker
 
-    LiveObserver(Path outputPath) {
-    liveTracker = new LiveTracker(outputPath)
+    LiveObserver(Path outputPath, int interval) {
+        liveTracker = new LiveTracker(outputPath, interval)
     }
 
     @Override
     void onProcessSubmit(TaskHandler handler, TraceRecord trace) {
+        log.info "Process Submitted: ${handler.task.name}"
         liveTracker.logEvent("Process Submitted", handler, trace)
-        }
+    }
 
     @Override
     void onProcessStart(TaskHandler handler, TraceRecord trace) {
@@ -249,12 +200,12 @@ class LiveObserver implements TraceObserver {
 
     @Override
     void onFlowComplete() {
-        liveTracker.renderEvents() // Renders all collected data at the end of the workflow
+        liveTracker.shutdownTracker()
     }
 
     @Override
     void onFlowError(TaskHandler handler, TraceRecord trace) {
         liveTracker.logEvent("Workflow Error", handler, trace)
-        liveTracker.renderEvents()
+        liveTracker.shutdownTracker()
     }
 }

@@ -1,1 +1,1 @@
-nextflow.prov.ProvObserverFactory
+nextflow.prov.LiveObserverFactory

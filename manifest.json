@@ -2,27 +2,47 @@
     "pipeline": null,
     "published": [
         {
-            "source": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/92/8ffdf69920669857c294d9b8042499/Bonjour.txt",
-            "target": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/results/Bonjour.txt",
+            "source": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/c2/0adcf79724cea783fe8bae5c31afd0/Hello.txt",
+            "target": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/results/Hello.txt",
+            "publishingTaskId": "3"
+        },
+        {
+            "source": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/cb/4610079278719acc5add9861ec324f/Bonjour.txt",
+            "target": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/results/Bonjour.txt",
             "publishingTaskId": "1"
         },
         {
-            "source": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/29/cb91ca30f21b9d1c9029766ad18983/Ciao.txt",
-            "target": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/results/Ciao.txt",
-            "publishingTaskId": "2"
-        },
-        {
-            "source": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ff/cd335f7277662f0b85e836c991741c/Hola.txt",
-            "target": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/results/Hola.txt",
+            "source": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/bb/513f2e6842959fbd2167032c458ece/Hola.txt",
+            "target": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/results/Hola.txt",
             "publishingTaskId": "4"
         },
         {
-            "source": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ae/c74615738ff737a271fd01ad8550dd/Hello.txt",
-            "target": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/results/Hello.txt",
-            "publishingTaskId": "3"
+            "source": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/a0/9535b9204a180eca276686ef615396/Ciao.txt",
+            "target": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/results/Ciao.txt",
+            "publishingTaskId": "2"
         }
     ],
     "tasks": {
+        "3": {
+            "id": "3",
+            "name": "sayHello (3)",
+            "cached": false,
+            "process": "sayHello",
+            "script": "\n    echo 'Hello world!' > Hello.txt\n    sleep 30\n    ",
+            "inputs": [
+                {
+                    "name": "x",
+                    "value": "Hello"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": null,
+                    "emit": null,
+                    "value": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/c2/0adcf79724cea783fe8bae5c31afd0/Hello.txt"
+                }
+            ]
+        },
         "1": {
             "id": "1",
             "name": "sayHello (1)",
@@ -39,27 +59,7 @@
                 {
                     "name": null,
                     "emit": null,
-                    "value": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/92/8ffdf69920669857c294d9b8042499/Bonjour.txt"
-                }
-            ]
-        },
-        "2": {
-            "id": "2",
-            "name": "sayHello (2)",
-            "cached": false,
-            "process": "sayHello",
-            "script": "\n    echo 'Ciao world!' > Ciao.txt\n    sleep 30\n    ",
-            "inputs": [
-                {
-                    "name": "x",
-                    "value": "Ciao"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": null,
-                    "emit": null,
-                    "value": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/29/cb91ca30f21b9d1c9029766ad18983/Ciao.txt"
+                    "value": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/cb/4610079278719acc5add9861ec324f/Bonjour.txt"
                 }
             ]
         },
@@ -79,27 +79,27 @@
                 {
                     "name": null,
                     "emit": null,
-                    "value": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ff/cd335f7277662f0b85e836c991741c/Hola.txt"
+                    "value": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/bb/513f2e6842959fbd2167032c458ece/Hola.txt"
                 }
             ]
         },
-        "3": {
-            "id": "3",
-            "name": "sayHello (3)",
+        "2": {
+            "id": "2",
+            "name": "sayHello (2)",
             "cached": false,
             "process": "sayHello",
-            "script": "\n    echo 'Hello world!' > Hello.txt\n    sleep 30\n    ",
+            "script": "\n    echo 'Ciao world!' > Ciao.txt\n    sleep 30\n    ",
             "inputs": [
                 {
                     "name": "x",
-                    "value": "Hello"
+                    "value": "Ciao"
                 }
             ],
             "outputs": [
                 {
                     "name": null,
                     "emit": null,
-                    "value": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ae/c74615738ff737a271fd01ad8550dd/Hello.txt"
+                    "value": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/a0/9535b9204a180eca276686ef615396/Ciao.txt"
                 }
             ]
         }

@@ -1,28 +1,28 @@
 [
     {
         "event_type": "Process Submitted",
-        "task_id": 1,
-        "task_name": "sayHello (1)",
+        "task_id": 2,
+        "task_name": "sayHello (2)",
         "status": "SUBMITTED",
         "exit": 2147483647,
-        "submit": "2024-04-29T01:34:58.633Z",
+        "submit": "2024-04-29T02:36:57.270Z",
         "start": null,
         "complete": null,
         "duration_seconds": null,
         "realtime_seconds": null,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/92/8ffdf69920669857c294d9b8042499",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/20/ea175e2edcbb43cb5be0706115c62b",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:34:58.641280Z",
+        "UTC_TIME": "2024-04-29T02:36:57.275131Z",
         "task": {
-            "id": "1",
-            "name": "sayHello (1)",
+            "id": "2",
+            "name": "sayHello (2)",
             "cached": false,
             "process": "sayHello",
             "inputs": [
                 {
                     "name": "x",
-                    "value": "Bonjour"
+                    "value": "Ciao"
                 }
             ],
             "outputs": [
@@ -36,28 +36,28 @@
     },
     {
         "event_type": "Process Started",
-        "task_id": 1,
-        "task_name": "sayHello (1)",
+        "task_id": 2,
+        "task_name": "sayHello (2)",
         "status": "RUNNING",
         "exit": 2147483647,
-        "submit": "2024-04-29T01:34:58.633Z",
-        "start": "2024-04-29T01:34:58.660Z",
+        "submit": "2024-04-29T02:36:57.270Z",
+        "start": "2024-04-29T02:36:57.318Z",
         "complete": null,
         "duration_seconds": null,
         "realtime_seconds": null,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/92/8ffdf69920669857c294d9b8042499",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/20/ea175e2edcbb43cb5be0706115c62b",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:34:58.672494Z",
+        "UTC_TIME": "2024-04-29T02:36:57.336006Z",
         "task": {
-            "id": "1",
-            "name": "sayHello (1)",
+            "id": "2",
+            "name": "sayHello (2)",
             "cached": false,
             "process": "sayHello",
             "inputs": [
                 {
                     "name": "x",
-                    "value": "Bonjour"
+                    "value": "Ciao"
                 }
             ],
             "outputs": [
@@ -71,28 +71,28 @@
     },
     {
         "event_type": "Process Submitted",
-        "task_id": 2,
-        "task_name": "sayHello (2)",
+        "task_id": 1,
+        "task_name": "sayHello (1)",
         "status": "SUBMITTED",
         "exit": 2147483647,
-        "submit": "2024-04-29T01:34:58.733Z",
+        "submit": "2024-04-29T02:36:57.392Z",
         "start": null,
         "complete": null,
         "duration_seconds": null,
         "realtime_seconds": null,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/29/cb91ca30f21b9d1c9029766ad18983",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/a3/cc244bac3841b18f2fe2f0d8f0de99",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:34:58.738772Z",
+        "UTC_TIME": "2024-04-29T02:36:57.397419Z",
         "task": {
-            "id": "2",
-            "name": "sayHello (2)",
+            "id": "1",
+            "name": "sayHello (1)",
             "cached": false,
             "process": "sayHello",
             "inputs": [
                 {
                     "name": "x",
-                    "value": "Ciao"
+                    "value": "Bonjour"
                 }
             ],
             "outputs": [
@@ -106,28 +106,28 @@
     },
     {
         "event_type": "Process Started",
-        "task_id": 2,
-        "task_name": "sayHello (2)",
+        "task_id": 1,
+        "task_name": "sayHello (1)",
         "status": "RUNNING",
         "exit": 2147483647,
-        "submit": "2024-04-29T01:34:58.733Z",
-        "start": "2024-04-29T01:34:58.762Z",
+        "submit": "2024-04-29T02:36:57.392Z",
+        "start": "2024-04-29T02:36:57.414Z",
         "complete": null,
         "duration_seconds": null,
         "realtime_seconds": null,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/29/cb91ca30f21b9d1c9029766ad18983",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/a3/cc244bac3841b18f2fe2f0d8f0de99",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:34:58.764365Z",
+        "UTC_TIME": "2024-04-29T02:36:57.417553Z",
         "task": {
-            "id": "2",
-            "name": "sayHello (2)",
+            "id": "1",
+            "name": "sayHello (1)",
             "cached": false,
             "process": "sayHello",
             "inputs": [
                 {
                     "name": "x",
-                    "value": "Ciao"
+                    "value": "Bonjour"
                 }
             ],
             "outputs": [
@@ -145,15 +145,50 @@
         "task_name": "sayHello (4)",
         "status": "SUBMITTED",
         "exit": 2147483647,
-        "submit": "2024-04-29T01:34:58.800Z",
+        "submit": "2024-04-29T02:36:57.470Z",
         "start": null,
         "complete": null,
         "duration_seconds": null,
         "realtime_seconds": null,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ff/cd335f7277662f0b85e836c991741c",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/b0/350b96a08f88932c4647e4e5a17363",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:34:58.805355Z",
+        "UTC_TIME": "2024-04-29T02:36:57.473391Z",
+        "task": {
+            "id": "4",
+            "name": "sayHello (4)",
+            "cached": false,
+            "process": "sayHello",
+            "inputs": [
+                {
+                    "name": "x",
+                    "value": "Hola"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": null,
+                    "emit": null,
+                    "value": "null"
+                }
+            ]
+        }
+    },
+    {
+        "event_type": "Process Started",
+        "task_id": 4,
+        "task_name": "sayHello (4)",
+        "status": "RUNNING",
+        "exit": 2147483647,
+        "submit": "2024-04-29T02:36:57.470Z",
+        "start": "2024-04-29T02:36:57.521Z",
+        "complete": null,
+        "duration_seconds": null,
+        "realtime_seconds": null,
+        "attempt": 1,
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/b0/350b96a08f88932c4647e4e5a17363",
+        "env": null,
+        "UTC_TIME": "2024-04-29T02:36:57.525055Z",
         "task": {
             "id": "4",
             "name": "sayHello (4)",
@@ -180,15 +215,15 @@
         "task_name": "sayHello (3)",
         "status": "SUBMITTED",
         "exit": 2147483647,
-        "submit": "2024-04-29T01:34:58.862Z",
+        "submit": "2024-04-29T02:36:57.539Z",
         "start": null,
         "complete": null,
         "duration_seconds": null,
         "realtime_seconds": null,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ae/c74615738ff737a271fd01ad8550dd",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/af/59c920bbb4fd4152d542df66dc9ca6",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:34:58.867398Z",
+        "UTC_TIME": "2024-04-29T02:36:57.544926Z",
         "task": {
             "id": "3",
             "name": "sayHello (3)",
@@ -211,54 +246,19 @@
     },
     {
         "event_type": "Process Started",
-        "task_id": 4,
-        "task_name": "sayHello (4)",
-        "status": "RUNNING",
-        "exit": 2147483647,
-        "submit": "2024-04-29T01:34:58.800Z",
-        "start": "2024-04-29T01:34:58.866Z",
-        "complete": null,
-        "duration_seconds": null,
-        "realtime_seconds": null,
-        "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ff/cd335f7277662f0b85e836c991741c",
-        "env": null,
-        "UTC_TIME": "2024-04-29T01:34:58.869211Z",
-        "task": {
-            "id": "4",
-            "name": "sayHello (4)",
-            "cached": false,
-            "process": "sayHello",
-            "inputs": [
-                {
-                    "name": "x",
-                    "value": "Hola"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": null,
-                    "emit": null,
-                    "value": "null"
-                }
-            ]
-        }
-    },
-    {
-        "event_type": "Process Started",
         "task_id": 3,
         "task_name": "sayHello (3)",
         "status": "RUNNING",
         "exit": 2147483647,
-        "submit": "2024-04-29T01:34:58.862Z",
-        "start": "2024-04-29T01:34:58.870Z",
+        "submit": "2024-04-29T02:36:57.539Z",
+        "start": "2024-04-29T02:36:57.629Z",
         "complete": null,
         "duration_seconds": null,
         "realtime_seconds": null,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ae/c74615738ff737a271fd01ad8550dd",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/af/59c920bbb4fd4152d542df66dc9ca6",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:34:58.876508Z",
+        "UTC_TIME": "2024-04-29T02:36:57.640215Z",
         "task": {
             "id": "3",
             "name": "sayHello (3)",
@@ -281,54 +281,19 @@
     },
     {
         "event_type": "Process Completed",
-        "task_id": 1,
-        "task_name": "sayHello (1)",
-        "status": "COMPLETED",
-        "exit": 0,
-        "submit": "2024-04-29T01:34:58.633Z",
-        "start": "2024-04-29T01:34:58.660Z",
-        "complete": "2024-04-29T01:35:28.716Z",
-        "duration_seconds": 30.083,
-        "realtime_seconds": 30.056,
-        "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/92/8ffdf69920669857c294d9b8042499",
-        "env": null,
-        "UTC_TIME": "2024-04-29T01:35:28.849594Z",
-        "task": {
-            "id": "1",
-            "name": "sayHello (1)",
-            "cached": false,
-            "process": "sayHello",
-            "inputs": [
-                {
-                    "name": "x",
-                    "value": "Bonjour"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": null,
-                    "emit": null,
-                    "value": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/92/8ffdf69920669857c294d9b8042499/Bonjour.txt"
-                }
-            ]
-        }
-    },
-    {
-        "event_type": "Process Completed",
         "task_id": 2,
         "task_name": "sayHello (2)",
         "status": "COMPLETED",
         "exit": 0,
-        "submit": "2024-04-29T01:34:58.733Z",
-        "start": "2024-04-29T01:34:58.762Z",
-        "complete": "2024-04-29T01:35:28.856Z",
-        "duration_seconds": 30.123,
-        "realtime_seconds": 30.094,
+        "submit": "2024-04-29T02:36:57.270Z",
+        "start": "2024-04-29T02:36:57.318Z",
+        "complete": "2024-04-29T02:37:27.347Z",
+        "duration_seconds": 30.077,
+        "realtime_seconds": 30.029,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/29/cb91ca30f21b9d1c9029766ad18983",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/20/ea175e2edcbb43cb5be0706115c62b",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:35:28.878140Z",
+        "UTC_TIME": "2024-04-29T02:37:27.443231Z",
         "task": {
             "id": "2",
             "name": "sayHello (2)",
@@ -344,7 +309,42 @@
                 {
                     "name": null,
                     "emit": null,
-                    "value": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/29/cb91ca30f21b9d1c9029766ad18983/Ciao.txt"
+                    "value": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/20/ea175e2edcbb43cb5be0706115c62b/Ciao.txt"
+                }
+            ]
+        }
+    },
+    {
+        "event_type": "Process Completed",
+        "task_id": 1,
+        "task_name": "sayHello (1)",
+        "status": "COMPLETED",
+        "exit": 0,
+        "submit": "2024-04-29T02:36:57.392Z",
+        "start": "2024-04-29T02:36:57.414Z",
+        "complete": "2024-04-29T02:37:27.449Z",
+        "duration_seconds": 30.057,
+        "realtime_seconds": 30.035,
+        "attempt": 1,
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/a3/cc244bac3841b18f2fe2f0d8f0de99",
+        "env": null,
+        "UTC_TIME": "2024-04-29T02:37:27.461090Z",
+        "task": {
+            "id": "1",
+            "name": "sayHello (1)",
+            "cached": false,
+            "process": "sayHello",
+            "inputs": [
+                {
+                    "name": "x",
+                    "value": "Bonjour"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": null,
+                    "emit": null,
+                    "value": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/a3/cc244bac3841b18f2fe2f0d8f0de99/Bonjour.txt"
                 }
             ]
         }
@@ -355,50 +355,50 @@
         "task_name": "sayHello (4)",
         "status": "COMPLETED",
         "exit": 0,
-        "submit": "2024-04-29T01:34:58.800Z",
-        "start": "2024-04-29T01:34:58.866Z",
-        "complete": "2024-04-29T01:35:28.879Z",
-        "duration_seconds": 30.079,
-        "realtime_seconds": 30.013,
-        "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ff/cd335f7277662f0b85e836c991741c",
-        "env": null,
-        "UTC_TIME": "2024-04-29T01:35:28.893031Z",
-        "task": {
-            "id": "4",
-            "name": "sayHello (4)",
-            "cached": false,
-            "process": "sayHello",
-            "inputs": [
-                {
-                    "name": "x",
-                    "value": "Hola"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": null,
-                    "emit": null,
-                    "value": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ff/cd335f7277662f0b85e836c991741c/Hola.txt"
-                }
-            ]
-        }
-    },
-    {
-        "event_type": "Process Completed",
-        "task_id": 3,
-        "task_name": "sayHello (3)",
-        "status": "COMPLETED",
-        "exit": 0,
-        "submit": "2024-04-29T01:34:58.862Z",
-        "start": "2024-04-29T01:34:58.870Z",
-        "complete": "2024-04-29T01:35:28.902Z",
+        "submit": "2024-04-29T02:36:57.470Z",
+        "start": "2024-04-29T02:36:57.521Z",
+        "complete": "2024-04-29T02:37:27.510Z",
         "duration_seconds": 30.04,
-        "realtime_seconds": 30.032,
+        "realtime_seconds": 29.989,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ae/c74615738ff737a271fd01ad8550dd",
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/b0/350b96a08f88932c4647e4e5a17363",
         "env": null,
-        "UTC_TIME": "2024-04-29T01:35:28.921894Z",
+        "UTC_TIME": "2024-04-29T02:37:27.518711Z",
+        "task": {
+            "id": "4",
+            "name": "sayHello (4)",
+            "cached": false,
+            "process": "sayHello",
+            "inputs": [
+                {
+                    "name": "x",
+                    "value": "Hola"
+                }
+            ],
+            "outputs": [
+                {
+                    "name": null,
+                    "emit": null,
+                    "value": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/b0/350b96a08f88932c4647e4e5a17363/Hola.txt"
+                }
+            ]
+        }
+    },
+    {
+        "event_type": "Process Completed",
+        "task_id": 3,
+        "task_name": "sayHello (3)",
+        "status": "COMPLETED",
+        "exit": 0,
+        "submit": "2024-04-29T02:36:57.539Z",
+        "start": "2024-04-29T02:36:57.629Z",
+        "complete": "2024-04-29T02:37:27.577Z",
+        "duration_seconds": 30.038,
+        "realtime_seconds": 29.948,
+        "attempt": 1,
+        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/af/59c920bbb4fd4152d542df66dc9ca6",
+        "env": null,
+        "UTC_TIME": "2024-04-29T02:37:27.588719Z",
         "task": {
             "id": "3",
             "name": "sayHello (3)",
@@ -414,7 +414,7 @@
                 {
                     "name": null,
                     "emit": null,
-                    "value": "/Users/vbk/Postdoc/COMPACT/VISHNU/nf-live-tracking/work/ae/c74615738ff737a271fd01ad8550dd/Hello.txt"
+                    "value": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/af/59c920bbb4fd4152d542df66dc9ca6/Hello.txt"
                 }
             ]
         }

@@ -9,7 +9,7 @@ process sayHello {
   script:
     """
     echo '$x world!' > ${x}.txt
-    sleep 30
+    sleep 60
     """
 }
 
