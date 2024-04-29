@@ -1,6 +1,6 @@
 
 config ?= compileClasspath
-version ?= $(shell grep 'Plugin-Version' plugins/nf-prov/src/resources/META-INF/MANIFEST.MF | awk '{ print $$2 }')
+version ?= $(shell grep 'Plugin-Version' plugins/nf-live-tracking/src/resources/META-INF/MANIFEST.MF | awk '{ print $$2 }')
 
 ifdef module 
 mm = :${module}:
@@ -45,8 +45,8 @@ endif
 
 install:
 	./gradlew copyPluginZip
-	rm -rf ${HOME}/.nextflow/plugins/nf-prov-${version}
-	cp -r build/plugins/nf-prov-${version} ${HOME}/.nextflow/plugins/
+	rm -rf ${HOME}/.nextflow/plugins/nf-live-tracking-${version}
+	cp -r build/plugins/nf-live-tracking-${version} ${HOME}/.nextflow/plugins/
 
 #
 # Upload JAR artifacts to Maven Central

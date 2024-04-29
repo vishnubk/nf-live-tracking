@@ -14,6 +14,19 @@
  * limitations under the License.
  */
 
-rootProject.name = 'nf-live-tracking'
-include 'plugins'
-include('plugins:nf-live-tracking')
+package nextflow.prov
+
+import java.nio.file.Path
+
+import nextflow.Session
+import nextflow.processor.TaskRun
+
+/**
+ *
+ * @author Ben Sherman <bentshermann@gmail.com>
+ */
+interface Renderer {
+
+    abstract void render(Session session, Set<TaskRun> tasks, Map<Path,Path> outputs)
+
+}

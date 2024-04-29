@@ -14,6 +14,22 @@
  * limitations under the License.
  */
 
-rootProject.name = 'nf-live-tracking'
-include 'plugins'
-include('plugins:nf-live-tracking')
+package nextflow.prov
+
+import groovy.transform.CompileStatic
+import nextflow.plugin.BasePlugin
+import nextflow.plugin.Scoped
+import org.pf4j.PluginWrapper
+
+/**
+ * Implements the Prov plugin entry point
+ *
+ * @author Ben Sherman <bentshermann@gmail.com>
+ */
+@CompileStatic
+class ProvPlugin extends BasePlugin {
+
+    ProvPlugin(PluginWrapper wrapper) {
+        super(wrapper)
+    }
+}
