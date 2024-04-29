@@ -17,14 +17,15 @@ plugins {
   id 'nf-live-tracking@2.0.0'
 }
 
-prov {
-  enabled = true
-  formats {
-    live {
-      file = "workflowTrace.json"
-      overwrite = true
-    }
-  }
+params {
+outputdir = "results" //Fill in the beam name here in production
+}
+live {     
+    enabled = true
+    file = "${params.outputdir}/PROGRESS"
+    overwrite = true
+    interval = 2  // Interval in seconds for JSON dumps
+
 }
 ```
 Currently, this plugin is not part of the nextflow plug-in registry. If you would like to use it, clone this repo and run make compile and make install. Have a look at the `workflowTrace.json` to see if such outputs are useful for you.
