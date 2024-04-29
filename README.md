@@ -1,7 +1,10 @@
 ```markdown
 # nf-live-tracking
 
-The `nf-live-tracking` plugin provides live tracking and status updates for each Nextflow process from the submission stage to completion or failure. It outputs a JSON file containing the values of input and output variables involved in each process. This plugin is particularly useful for building analytics, integrating with Kafka, or syncing with your database systems.
+The `nf-live-tracking` plugin provides live tracking and status updates for each Nextflow process
+from the submission stage to completion or failure. It outputs a JSON file containing the values of
+input and output variables involved in each process. This plugin is useful for building analytics,
+integrating with Kafka, or syncing with your database systems.
 
 ## Getting Started
 
