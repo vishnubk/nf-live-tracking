@@ -1,4 +1,4 @@
-```markdown
+
 # nf-live-tracking
 
 The `nf-live-tracking` plugin provides live tracking and status updates for each Nextflow process
