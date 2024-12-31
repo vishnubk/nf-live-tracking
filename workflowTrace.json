@@ -1,5 +1,7 @@
 [
-    {
+    {   
+        "session_id": "878d60d9-de5c-4620-93f5-8616f61dcd8e",
+        "run_name": "magical_bell",
         "event_type": "Process Submitted",
         "task_id": 2,
         "task_name": "sayHello (2)",
@@ -46,7 +48,7 @@
         "duration_seconds": null,
         "realtime_seconds": null,
         "attempt": 1,
-        "workdir": "/Users/vbk/Postdoc/COMPACT/nf-live-tracking/work/20/ea175e2edcbb43cb5be0706115c62b",
+        "workdir": "/software/pipelines/work/20/ea175e2edcbb43cb5be0706115c62b",
         "env": null,
         "UTC_TIME": "2024-04-29T02:36:57.336006Z",
         "task": {

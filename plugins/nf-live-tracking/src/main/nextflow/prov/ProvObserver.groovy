@@ -78,7 +78,7 @@ class LiveTracker {
         root.toString()
     }
 
-    void logEvent(String eventType, TaskHandler handler, TraceRecord trace) {
+    void logEvent(String eventType, TaskHandler handler, TraceRecord trace, String workflowSessionId, String workflowrunName) {
         String utcNow = ZonedDateTime.now(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT)
 
         BigDecimal durationSeconds = trace.get('duration') ? ((BigDecimal) trace.get('duration')).divide(new BigDecimal("1000.0")) : null
@@ -89,6 +89,8 @@ class LiveTracker {
         String completeTime = trace.get('complete') ? Instant.ofEpochMilli((Long) trace.get('complete')).atZone(ZoneOffset.UTC).format(DateTimeFormatter.ISO_INSTANT) : null
 
         Map eventDetails = [
+            'session_id': workflowSessionId,
+            'run_name': workflowrunName,
             'event_type': eventType,
             'task_id': handler.task.id,
             'task_name': handler.task.name,
@@ -176,26 +178,36 @@ class LiveTracker {
 @CompileStatic
 @Slf4j
 class LiveObserver implements TraceObserver {
-    private LiveTracker liveTracker
 
+    private LiveTracker liveTracker
+    private String workflowSessionId  // Unique identifier for the workflow session
+    private String workflowRunName  // Name of the workflow run
     LiveObserver(Path outputPath, int interval) {
-        liveTracker = new LiveTracker(outputPath, interval)
+        this.liveTracker = new LiveTracker(outputPath, interval)
+    }
+
+    @Override
+    void onFlowCreate(Session session) {
+        // Called at the start of the workflow
+        this.workflowSessionId = session.getUniqueId()
+        this.workflowRunName = session.getRunName()
+        log.info "LiveObserver captured workflow sessionId=${workflowSessionId}, runName=${workflowRunName}"
     }
 
     @Override
     void onProcessSubmit(TaskHandler handler, TraceRecord trace) {
         log.info "Process Submitted: ${handler.task.name}"
-        liveTracker.logEvent("Process Submitted", handler, trace)
+        liveTracker.logEvent("Process Submitted", handler, trace, workflowSessionId, workflowRunName)
     }
 
     @Override
     void onProcessStart(TaskHandler handler, TraceRecord trace) {
-        liveTracker.logEvent("Process Started", handler, trace)
+        liveTracker.logEvent("Process Started", handler, trace, workflowSessionId, workflowRunName)
     }
 
     @Override
     void onProcessComplete(TaskHandler handler, TraceRecord trace) {
-        liveTracker.logEvent("Process Completed", handler, trace)
+        liveTracker.logEvent("Process Completed", handler, trace, workflowSessionId, workflowRunName)
     }
 
     @Override
@@ -205,7 +217,8 @@ class LiveObserver implements TraceObserver {
 
     @Override
     void onFlowError(TaskHandler handler, TraceRecord trace) {
-        liveTracker.logEvent("Workflow Error", handler, trace)
+        liveTracker.logEvent("Workflow Error", handler, trace, workflowSessionId, workflowRunName)
         liveTracker.shutdownTracker()
     }
 }
+
